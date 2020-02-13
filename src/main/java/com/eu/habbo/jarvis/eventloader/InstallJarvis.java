@@ -1,33 +1,24 @@
 package com.eu.habbo.jarvis.eventloader;
-
 import com.eu.habbo.Emulator;
 import com.eu.habbo.jarvis.Jarvis2;
 import com.eu.habbo.plugin.EventHandler;
 import com.eu.habbo.plugin.EventListener;
 import com.eu.habbo.plugin.events.emulator.EmulatorLoadedEvent;
-
-
 import java.util.Scanner;
-
 import static com.eu.habbo.Emulator.ANSI_BLUE;
 import static com.eu.habbo.Emulator.ANSI_WHITE;
-
 
 public class InstallJarvis implements EventListener {
     public static void onFirstStart() {
         Emulator.getPluginManager().registerEvents(Jarvis2.INSTANCE, new InstallJarvis());
     }
 
-
     @EventHandler
     public static void InstallJarvisSystem(EmulatorLoadedEvent event) {
         System.out.println("[" + ANSI_BLUE + "PLUGIN" + ANSI_WHITE + "] " + "This is your first time running Jarvis 2! Press Enter to install Jarvis!");
         Scanner scanner = new Scanner(System.in);
         String readString = scanner.nextLine();
-        System.out.println(readString);
         if (readString.equals("")) {
-            System.out.println("[" + ANSI_BLUE + "PLUGIN" + ANSI_WHITE + "] " + "---------------------------------");
-            System.out.println("[" + ANSI_BLUE + "PLUGIN" + ANSI_WHITE + "] " + "Installing Jarvis Part 1/3...");
             // Register Texts
             Emulator.getTexts().register("discord.logging.emustartstop.text.1", "Arcturus Morningstar was just started on your server at **%time%** and Jarvis 2 is enabled!");
             Emulator.getTexts().register("discord.logging.emustartstop.text.2", "Arcturus Morningstar was just shutdown at ***%time%*** if you did not authorize this shutdown, investigate it asap. Goodbye!");
@@ -43,7 +34,6 @@ public class InstallJarvis implements EventListener {
             Emulator.getTexts().register("", "");
 
             //Register The Webhook configs
-            System.out.println("[" + ANSI_BLUE + "PLUGIN" + ANSI_WHITE + "] " + "Installing Jarvis Part 2/3...");
             Emulator.getConfig().register("discord.logging.startstopurl", "ADD YOUR DISCORD WEBHOOK URL HERE!");
             Emulator.getConfig().register("discord.logging.userloginandouturl", "ADD YOUR DISCORD WEBHOOK URL HERE!");
             Emulator.getConfig().register("discord.logging.usercommandsurl", "ADD YOUR DISCORD WEBHOOK URL HERE!");
@@ -60,13 +50,16 @@ public class InstallJarvis implements EventListener {
             Emulator.getConfig().register("discord.logging.usertakesphotos", "1");
 
             // Set it as installed.
-            System.out.println("[" + ANSI_BLUE + "PLUGIN" + ANSI_WHITE + "] " + "Installing Jarvis Part 3/3...");
             Emulator.getConfig().register("jarvis_installed", "1");
-            System.out.println("[" + ANSI_BLUE + "PLUGIN" + ANSI_WHITE + "] " + "---------------------------------");
-            // All done.
-            System.out.println("[" + ANSI_BLUE + "PLUGIN" + ANSI_WHITE + "] " + "All Done! Configure your webhooks in emulator_config, and please reboot your emulator to use Jarvis!! It should then work automatically, enjoy!");
+            System.out.println("[" + ANSI_BLUE + "PLUGIN" + ANSI_WHITE + "] " + "Okay! The Database columns exist! Do you need help with configuring Jarvis and setting up your webhooks? If so press Y!");
+            String input = scanner.nextLine();
+            if ("yes".equals(input)) {
+                JarvisWebHookSetup.go();
 
+            }
+            }
         }
-    }
 }
+
+
 
