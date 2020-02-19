@@ -1,5 +1,10 @@
 package com.eu.habbo.jarvis.eventloader;
+import com.eu.habbo.Emulator;
 import com.eu.habbo.plugin.EventListener;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Scanner;
 import static com.eu.habbo.Emulator.ANSI_BLUE;
 import static com.eu.habbo.Emulator.ANSI_WHITE;
@@ -25,14 +30,49 @@ public class JarvisWebHookSetup implements EventListener {
         String userphotourl = scanner.nextLine();
         System.out.println("[" + ANSI_BLUE + "PLUGIN" + ANSI_WHITE + "] " + "Okay! All Done!");
         // it's 2am ill finish this bit tomorrow. night night.
-        //  try (Connection connection = Emulator.getDatabase().getDataSource().getConnection(); PreparedStatement statement = connection.prepareStatement("")) {
-        //     statement.setString(1, startstopurl);
-        //    statement.setString(2, userloginandouturl);
-        //    statement.execute();
-        // } catch (SQLException e) {
-        //     Emulator.getLogging().logSQLException(e);
-        // }
+          try (Connection connection = Emulator.getDatabase().getDataSource().getConnection(); PreparedStatement statement = connection.prepareStatement("UPDATE `emulator_settings` SET `value` = ? WHERE `key` = 'discord.logging.startstopurl'")) {
+              statement.setString(1, startstopurl);
+              statement.execute();
+          } catch (SQLException e) {
+             Emulator.getLogging().logSQLException(e);
+         }
+        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection(); PreparedStatement statement = connection.prepareStatement("UPDATE `emulator_settings` SET `value` = ? WHERE `key` = 'discord.logging.userloginandouturl'")) {
+            statement.setString(1, userloginandouturl);
+            statement.execute();
+        } catch (SQLException e) {
+            Emulator.getLogging().logSQLException(e);
+        }
+        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection(); PreparedStatement statement = connection.prepareStatement("UPDATE `emulator_settings` SET `value` = ? WHERE `key` = 'discord.logging.usercommandsurl'")) {
+            statement.setString(1, usercommandsurl);
+            statement.execute();
+        } catch (SQLException e) {
+            Emulator.getLogging().logSQLException(e);
+        }
+        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection(); PreparedStatement statement = connection.prepareStatement("UPDATE `emulator_settings` SET `value` = ? WHERE `key` = 'discord.logging.usercommandsurl'")) {
+            statement.setString(1, usercommandsurl);
+            statement.execute();
+        } catch (SQLException e) {
+            Emulator.getLogging().logSQLException(e);
+        }
+        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection(); PreparedStatement statement = connection.prepareStatement("UPDATE `emulator_settings` SET `value` = ? WHERE `key` = 'discord.logging.staffcommandsurl'")) {
+            statement.setString(1, staffcommandsurl);
+            statement.execute();
+        } catch (SQLException e) {
+            Emulator.getLogging().logSQLException(e);
+        }
+        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection(); PreparedStatement statement = connection.prepareStatement("UPDATE `emulator_settings` SET `value` = ? WHERE `key` = 'discord.logging.userbuyscatalogueurl'")) {
+            statement.setString(1, userbuyscatalogueurl);
+            statement.execute();
+        } catch (SQLException e) {
+            Emulator.getLogging().logSQLException(e);
+        }
+        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection(); PreparedStatement statement = connection.prepareStatement("UPDATE `emulator_settings` SET `value` = ? WHERE `key` = 'discord.logging.userphotourl'")) {
+            statement.setString(1, userphotourl);
+            statement.execute();
+        } catch (SQLException e) {
+            Emulator.getLogging().logSQLException(e);
+        }
 
-        // All done.
+        Emulator.getConfig().reload();
     }
 }

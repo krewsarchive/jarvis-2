@@ -51,7 +51,7 @@ public class InstallJarvis implements EventListener {
 
             // Set it as installed.
             Emulator.getConfig().register("jarvis_installed", "1");
-            System.out.println("[" + ANSI_BLUE + "PLUGIN" + ANSI_WHITE + "] " + "Okay! The Database columns exist! Do you need help with configuring Jarvis and setting up your webhooks? If so press Y!");
+            System.out.println("[" + ANSI_BLUE + "PLUGIN" + ANSI_WHITE + "] " + "Okay! The Database columns exist! Do you need help with configuring Jarvis and setting up your webhooks? If so type yes! Otherwise just press enter...");
             String input = scanner.nextLine();
             if ("yes".equals(input)) {
                 JarvisWebHookSetup.go();
