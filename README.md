@@ -14,6 +14,8 @@ Planned Features:
 - Room entering logs
 - Ban logs
 
+**Download: https://git.krews.org/morningstar/jarvis-2/-/releases**
+
 
 Include this readme with every version of this software if modified, as per the license.
 (c) Krews.org, Jarvis 2 created By John.
